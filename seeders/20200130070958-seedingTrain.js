@@ -6,7 +6,7 @@ module.exports = {
       {
         name : 'Argo Dwipangga',
         DestinationId : 1,
-        derparture : 'Malam',
+        derpature : 'Malam',
         price : 280000,
         seats : 5,
         createdAt : new Date(),
@@ -15,7 +15,7 @@ module.exports = {
       {
         name : 'Bengawan',
         DestinationId : 1,
-        derparture : 'Pagi',
+        derpature : 'Pagi',
         price : 74000,
         seats : 10,
         createdAt : new Date(),

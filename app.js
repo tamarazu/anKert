@@ -10,8 +10,7 @@ app.use(express.static('public'))
 app.use(session({
     secret: 'cat',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
+    saveUninitialized: true
   }))
 
 app.use('/', router)
