@@ -3,6 +3,7 @@ const Controller = require('../controllers/admin')
 const middleware = require('../middleware/checkLoginAdmin')
 
 router.get('/', middleware, Controller.showProfile)
+router.get('/home', Controller.backHome)
 router.get('/login', Controller.login)
 router.post('/login', Controller.checkAccount)
 router.get('/logout', Controller.logout)
