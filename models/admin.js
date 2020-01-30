@@ -1,16 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model
-  class Passanger extends Model{}
-  Passanger.init({
+  class Admin extends Model{}
+  Admin.init({
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
-    balance: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING
   }, {});
-  Passanger.associate = function(models) {
+  Admin.associate = function(models) {
     // associations can be defined here
   };
-  return Passanger;
+  return Admin;
 };
