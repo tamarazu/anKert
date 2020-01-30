@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   <%- include('../partials/head.ejs')%>
+  </head>
+  <body>
+    <center>
+      <h1>Welcome !!!Name!!!</h1>
+      <br>
+      <br>
+      <h3>Your balance is : 500000</h3>
+      <br>
+      <br>
+  
+      <form action="/passanger/search" method="POST">
+        Mau Kemana? <br>
+        <input type="text" name="destination">
+        <input type="submit" value="GO!">
+      </form>
+      <br>
+        
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Train</th>
+              <th scope="col">Departure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+    </center>
+  </body>
+</html>
