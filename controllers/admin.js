@@ -4,6 +4,11 @@ var bcrypt = require('bcryptjs')
 var salt = bcrypt.genSaltSync(10)
 
 class Controller{
+    static backHome(req, res){
+        req.session.isLogin = null
+        req.session.username = null
+        res.redirect('/')
+    }
     static login(req, res){
         let username = req.session.username
         res.render('admin/login.ejs', {err : null, username : 0})
@@ -30,7 +35,7 @@ class Controller{
                 }
                 else{
                     const err = 'Username / Password salah'
-                    res.render('admin/login.ejs', {err})
+                    res.render('admin/login.ejs', {err, username : 0})
                 }
             })
             .catch(err =>{
@@ -40,7 +45,7 @@ class Controller{
     static logout(req, res){
         req.session.isLogin = null
         req.session.username = null
-        res.render('admin/login.ejs', {err : null})
+        res.render('admin/login.ejs', {err : null, username : '0'})
     }
     static showProfile(req, res){
         let username = req.session.username
