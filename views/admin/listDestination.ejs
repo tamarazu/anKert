@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-</head>
-<body>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% result.map(data => { %> 
-                <tr>
-                    <td><%= data.id %></td>
-                    <td><%= data.name %></td>
-                    <td><a href="/admin/update/<%= data.id %>/destination">Edit</a> | <a href="/admin/delete/<%= data.id %>/destination">Delete</a></td>
-                </tr>    
-            <%})%>
-        </tbody>
-    </table>
-</body>
+        <head>
+            <%- include('../partials/head.ejs') %>
+        </head>
+        <body class="bg">
+                <%- include('../partials/headerAdmin.ejs', {username}) %>
+                <br><br><br><br>
+                <div class="container">
+                    <div class="row">
+                        <!-- <div class="col-sm"></div> -->
+                        <div class="col-sm">
+                                <table class="table text-center">
+                                    <thead class="table-dark text-light">
+                                        <tr>
+                                            <th colspan="3">Destination</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-light table-stripped table-hover">
+                                        <% result.map(data => { %> 
+                                            <tr>
+                                                <td><%= data.id %></td>
+                                                <td><%= data.name %></td>
+                                                <td><a href="/admin/update/<%= data.id %>/destination">Edit</a> | <a href="/admin/delete/<%= data.id %>/destination">Delete</a></td>
+                                            </tr>    
+                                        <%})%>
+                                    </tbody>
+                                </table>
+                        </div>
+                        <!-- <div class="col-sm"></div> -->
+                    </div>
+                </div>
+                <%- include('../partials/jquery.ejs') %>
+    </body>
 </html>

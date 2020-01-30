@@ -1,0 +1,7 @@
+.bg {
+    background-image: url("https://www.itl.cat/pngfile/big/11-114869_fantasy-art-artwork-fox-wallpaper-fox-in-forest.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+}
