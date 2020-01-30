@@ -1,4 +1,13 @@
 const { Passanger, Train, Destination, Ticket} = require('../models')
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'ankertrain@gmail.com',
+        pass: 'ankertrain123'
+    }
+});
 
 class PassangerController{
     
@@ -85,113 +94,114 @@ class PassangerController{
         Train.findByPk(id)
           .then( information => {
               res.render('./passanger/buyTicket', {information})
-              //   res.send(information)
           })
           .catch(err => {
               res.send(err)
           })
-    }
-
-    static buyValidation(req, res){
-        let { id, name, derpature, price} = req.body
-        let input = { id, name, derpature, price}
-        let currentBalance
-        let priceTrain
-        let ticketsInformation
-        let trainsInformation
-        let balance
-        let passanger
-        let idTrainBuy = Number(input.id)
+        }
         
-        console.log(input)
-        //! NEED SESSION
-        Passanger.findOne({where : {
-            username : req.session.username
-        }})
-        .then( user => {
-            passanger = user
-            balance = Number(user.balance)
-            return Train.findByPk(idTrainBuy)
-        })
-        .then(trainByPk => {
-            trainsInformation = trainByPk
-            return Ticket.findAll({where : {
-                TrainId : idTrainBuy
+        static buyValidation(req, res){
+            let { id, name, derpature, price} = req.body
+            let input = { id, name, derpature, price}
+            let penumpang = req.body
+            let currentBalance
+            let priceTrain
+            let ticketsInformation
+            let trainsInformation
+            let balance
+            let passanger
+            let idTrainBuy = Number(input.id)
+            
+            console.log(input)
+            //! NEED SESSION
+            Passanger.findOne({where : {
+                username : req.session.username
             }})
-        })
-        .then( tickets => {
-            ticketsInformation = tickets
-            console.log(ticketsInformation)
-            if((ticketsInformation.length )< trainsInformation.seats){
-            if(trainsInformation.price < balance){
-                priceTrain = trainsInformation.price
-                let seatId = ticketsInformation.length
-                let createTickets = {
-                    TrainId : input.id,
-                    PassangerId : 1,
-                    seat_number : seatId + 1
-                }
-                let currentBalanceUser = balance - priceTrain
-                console.log(passanger.id)
-                return Ticket.create(createTickets)
-                    // .then(ticketCreateNew => {
-                    //     let input = {
-                    //         id : passanger.id,
-                    //         first_name,
-                    //         last_name, 
-                    //         balance : currentBalanceUser,
-                    //         password,  
-                    //     }
-                    //     console.log(currentBalanceUser, '=====================')
-                    //     // return Passanger.update(input, {
-                    //     //     where : {
-                    //     //         id : passanger.id
-                    //     //     }
-                    //     // })
-                    // })
-                    .then(updateBalance => {
-                        res.redirect('/passanger')
-                    })
-                    .catch(err => {
-                        res.send(err)
-                    })
-            } else {
-                res.redirect('/passanger')
-            }
-            } else{
-                res.send('Seat sudah Penuh!')
-            }
-        })
-        .catch(err => {
-            res.send(err)
-        })
-    }
+            .then( user => {
+                passanger = user
+                balance = Number(user.balance)
+                return Train.findByPk(idTrainBuy)
+            })
+            .then(trainByPk => {
+                trainsInformation = trainByPk
+                return Ticket.findAll({where : {
+                    TrainId : idTrainBuy
+                }})
+            })
+            .then( tickets => {
+                ticketsInformation = tickets
+                console.log(ticketsInformation)
+                if((ticketsInformation.length )< trainsInformation.seats){
+                if(trainsInformation.price < balance){
+                    priceTrain = trainsInformation.price
+                    let seatId = ticketsInformation.length
+                    let createTickets = {
+                        TrainId : input.id,
+                        PassangerId : 1,
+                        seat_number : seatId + 1
+                    }
+                    let currentBalanceUser = balance - priceTrain
+                    console.log(passanger.id)
+                    return Ticket.create(createTickets)
+                        .then(updateBalance => {
+                            let mailOptions = {
+                                from: 'ankertrain@gmail.com',
+                                to: penumpang.email,
+                                subject: 'Konfirmasi Pembayaran Selesai',
+                                text: `Terima kasih ${penumpang.name} sudah melakukan pembelian ticket kereta menggunakan AnKert!
+                                Berikut detail pemesananmu:
+                                Train : ${penumpang.name},
+                                Departure : ${penumpang.derpature}
+                                Price : Rp ${penumpang.price}`
+                            };
 
-    static delete(req, res){
-        let id = Number(req.params.idTrain)
-        let seat_number = Number(req.params.seatNumber)
-        Ticket.destroy({where : {
-            TrainId : id,
-            seat_number : seat_number
-        }})
-          .then(success => {
-              res.redirect('/passanger')
-          })
-          .catch(err => {
-              res.send(err)
-          })
+                            transporter.sendMail(mailOptions, (err, info) => {
+                                if (err) throw err;
+                                console.log('Email sent: ' + info.response);
+                            });
+
+                            res.redirect('/passanger')
+                        })
+                        .catch(err => {
+                            res.send(err)
+                        })
+                } else {
+                    res.redirect('/passanger')
+                }
+                } else{
+                    res.send('Seat sudah Penuh!')
+                }
+            })
+            .catch(err => {
+                res.send(err)
+            })
+        }
+
+        static delete(req, res){
+            let id = Number(req.params.idTrain)
+            let seat_number = Number(req.params.seatNumber)
+            Ticket.destroy({where : {
+                TrainId : id,
+                seat_number : seat_number
+            }})
+            .then(success => {
+                res.redirect('/passanger')
+            })
+            .catch(err => {
+                res.send(err)
+            })
     }
 
     static showProfile(req, res){
         Passanger.findOne({where : {
             username : req.session.username
         }})
-          .then(userLogin => {
-              res.render('passanger/showProfile', {userLogin})
-          })
-          .catch(err => {
-              res.send(err)
-          })
+        .then(userLogin => {
+            res.render('passanger/showProfile', {userLogin})
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static editProfile(req, res){
