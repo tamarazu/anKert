@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   <%- include('../partials/head.ejs')%>
+  </head>
+  <body>      
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Train Name</th>
+            <th scope="col">Depart</th>
+            <th scope="col">Price</th>
+            <th scope="col">Buy Now?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% trains.forEach( train => {%>
+            <tr>
+              <th scope="row"><%= train.id%></th>
+              <td><%= train.name%></td>
+              <td><%= train.derpature%></td>
+              <td><%= train.price%></td>
+              <td><a href="/passanger/<%= train.id%>/buy"><input type="button" value="YES"></a></td>
+            </tr>
+          <%})%>
+        </tbody>
+      </table>
+
+      <a href="/passanger"><input type="button" value="Back to Home"></a>
+  </body>
+</html>

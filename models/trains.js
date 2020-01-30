@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Train.associate = function(models) {
     // associations can be defined here
     Train.belongsTo(models.Destination)
-    Train.belongsToMany(models.Passanger, {trough : models.Ticket})
+    Train.belongsToMany(models.Passanger, {through : models.Ticket})
   };
   return Train;
 };
