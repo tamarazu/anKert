@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Departure</th>
+                <th>Price</th>
+                <th>Seat Capacity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% result.map(data => { %> 
+                <tr>
+                    <td><%= data.id %></td>
+                    <td><%= data.name %></td>
+                    <td><%= data.Destination.name %></td>
+                    <td><%= data.derpature %></td>
+                    <td><%= formatCurrency(data.price) %></td>
+                    <td><%= data.seats %></td>
+                    <td><a href="/admin/update/<%= data.id %>/train">Edit</a> | <a href="/admin/delete/<%= data.id %>/train">Delete</a></td>
+                </tr>    
+            <%})%>
+        </tbody>
+    </table>
+</body>
+</html>

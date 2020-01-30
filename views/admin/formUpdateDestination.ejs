@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <form action="/update/<%= result.id %>/train" method="post">
+        <label>Name : </label><br>
+        <input type="text" name="name" value="<%= result.name %>"><br>
+        <input type="submit" value="Change">
+    </form>
+</body>
+</html>
