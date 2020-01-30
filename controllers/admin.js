@@ -8,7 +8,6 @@ class Controller{
     static checkAccount(req, res){
         const username = req.body.username
         const password = req.body.password
-        console.log(username)
         Admin.findAll()
             .then(result => {
                 let flag = false
