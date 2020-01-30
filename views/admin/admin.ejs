@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <%- include('../partials/head.ejs') %>
 </head>
-<body>
-    <h3>Profile</h3>
-    <label>Username : </label> &emsp;
-    <label><%= result.username%></label>
-    <ul style="list-style: none;">
-        <li><a href="/admin/listTrain">List of Train</a></li>
-        <li><a href="/admin/listDestination">List of Destination</a></li>
-        <li><a href="/admin/addTrain">Add New Train</a></li>
-        <li><a href="/admin/addDestination">Add New Destination</a></li>
-    </ul>
+<body class="bg">
+    <%- include('../partials/headerAdmin.ejs', {username}) %>
+    <br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                    <div class="card card-signup z-depth-0 bg-light ">
+                        <div class="card-body">
+                            <br>
+                                <h3 class="text-center">Profile</h3>
+                                <div class="card-text">
+                                    <label>Full Name :</label> &emsp;
+                                    <label><%= result.first_name%> <%= result.last_name %></label>
+                                    <br>
+                                    <label>Username  : </label> &emsp;
+                                    <label><%= result.username%></label>
+                                    <br>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><a href="/admin/listTrain" >List of Train</a></li>
+                                    <li class="list-group-item"><a href="/admin/listDestination" >List of Destination</a></li>
+                                    <li class="list-group-item"><a href="/admin/addTrain" >Add New Train</a></li>
+                                    <li class="list-group-item"><a href="/admin/addDestination" >Add New Destination</a></li>
+                                </ul>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-lg">
+        </div>
+    </div>
+    <%- include('../partials/jquery.ejs') %>
 </body>
 </html>

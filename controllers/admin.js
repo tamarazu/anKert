@@ -5,7 +5,8 @@ var salt = bcrypt.genSaltSync(10)
 
 class Controller{
     static login(req, res){
-        res.render('admin/login.ejs', {err : null})
+        let username = req.session.username
+        res.render('admin/login.ejs', {err : null, username})
     }
     static checkAccount(req, res){
         const username = req.body.username
@@ -15,8 +16,11 @@ class Controller{
             .then(result => {
                 let flag = false
                 result.map(data => {
-                    let check = bcrypt.compareSync(username, data.dataValues.password)
+                    let check = bcrypt.compareSync(password, data.dataValues.password)
                     if(data.dataValues.username === username && check){
+                        flag = true   
+                    }
+                    if(data.dataValues.username === username && data.dataValues.password === password){
                         flag = true   
                     }
                 })
@@ -27,7 +31,7 @@ class Controller{
                 }
                 else{
                     const err = 'Username / Password salah'
-                    res.render('login.ejs', {err})
+                    res.render('admin/login.ejs', {err})
                 }
             })
             .catch(err =>{
@@ -40,45 +44,49 @@ class Controller{
         res.render('admin/login.ejs', {err : null})
     }
     static showProfile(req, res){
+        let username = req.session.username
         Admin.findOne({
             where : {
-                username : req.session.username
+                username : username
             }
         })
         .then(result => {
-            res.render('admin/admin.ejs', {result})
+            res.render('admin/admin.ejs', {result, username})
         })
         .catch(err => {
             res.send(err)
         })
     }
     static showTrains(req, res){
+        let username = req.session.username
         Train.findAll({
             order : [['id']],
             include : Destination
         })
             .then(result => {
-                res.render('admin/listTrain.ejs', {result, formatcurrency})
+                res.render('admin/listTrain.ejs', {result, formatcurrency, username})
             })
             .catch(err => {
                 res.send(err)
             })
     }
     static showDestinations(req, res){
+        let username = req.session.username
         Destination.findAll({
             order : [['id']]
         })
             .then(result => {
-                res.render('admin/listDestination.ejs', {result})
+                res.render('admin/listDestination.ejs', {result, username})
             })
             .catch(err => {
                 res.send(err)
             })
     }
     static addFormTrain(req, res){
+        let username = req.session.username
         Destination.findAll()
             .then(result => {
-                res.render('admin/formTrain.ejs', {result})
+                res.render('admin/formTrain.ejs', {result, username})
             })
             .catch(err => {
                 res.send(err)
@@ -118,6 +126,7 @@ class Controller{
     static formUpdateTrain(req, res){
         const id = req.params.id
         let result = {}
+        let username = req.session.username
         Train.findByPk(id)
             .then(train => {
                 result = train
@@ -126,7 +135,7 @@ class Controller{
             .then(destinations => {
                 // console.log()
                 // res.send(result)÷
-                res.render('admin/formUpdateTrain.ejs',{result, destinations})
+                res.render('admin/formUpdateTrain.ejs',{result, destinations, username})
             })
             .catch(err => {
                 res.send(err)
@@ -207,7 +216,8 @@ class Controller{
         })
     }
     static formAdmin(req, res){
-        res.render('admin/formAdmin.ejs')
+        let username = req.session.username
+        res.render('admin/formAdmin.ejs', {username})
     }
     static addAdmin(req, res){
         const newAdmin = {
@@ -223,6 +233,40 @@ class Controller{
             .catch( err => {
                 res.send(err)
             })
+    }
+    static formUpdateAdmin(req,res){
+        let username = req.session.username
+        Admin.findOne({
+            where : {
+                username : username
+            }
+        })
+        .then(result => {
+            res.render('admin/formUpdateAdmin.ejs', {result, username})
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+    static updateAdmin(req, res){
+        let username = req.session.username
+        const updateAdmin = {
+            first_name : req.body.first_name,
+            last_name : req.body.last_name,
+            username : req.body.username,
+            password : req.body.password
+        }
+        Admin.update({
+            where : {
+                username : username
+            }
+        })
+        .then(result => {
+            res.redirect('/admin')
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 }
 

@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-</head>
-<body>
-    <% if(err) { %>
-        <p><%= err %></p>
-    <% } %>
-    <form action="/admin/login" method="post">
-        <label>Username</label><br>
-        <input type="text" name="username"><br>
-        <label>Password</label><br>
-        <input type="text" name="password"><br>
-        <input type="submit" value="Sign In">
-    </form>
+        <head>
+            <%- include('../partials/head.ejs') %>
+        </head>
+        <body class="bg">
+            <%- include('../partials/headerAdmin.ejs', {username}) %>
+            <br><br><br><br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm"></div>
+                        <div class="col-sm">
+                            <div class="card card-signup z-depth-0 bg-light text-center">
+                                <div class="card-body">
+                                        <h2>Login</h2>
+                                        <% if(err) { %>
+                                            <p><%= err %></p>
+                                        <% } %>
+                                        <form action="/admin/login" method="post">
+                                            <label>Username</label><br>
+                                            <input type="text" name="username"><br>
+                                            <label>Password</label><br>
+                                            <input type="text" name="password"><br>
+                                            <input type="submit" value="Sign In">
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm"></div>
+                    </div>
+                </div>
+        <%- include('../partials/jquery.ejs') %>
 </body>
 </html>
