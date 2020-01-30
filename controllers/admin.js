@@ -1,5 +1,7 @@
 const {Admin, Train, Passanger, Ticket, Destination} = require('../models')
 const formatcurrency = require('../helpers/formatCurrency')
+var bcrypt = require('bcryptjs')
+var salt = bcrypt.genSaltSync(10)
 
 class Controller{
     static login(req, res){
@@ -12,18 +14,15 @@ class Controller{
         Admin.findAll()
             .then(result => {
                 let flag = false
-                console.log(username)
-                console.log(result)
                 result.map(data => {
-                    if(data.dataValues.username === username && data.dataValues.password === password){
+                    let check = bcrypt.compareSync(username, data.dataValues.password)
+                    if(data.dataValues.username === username && check){
                         flag = true   
                     }
                 })
-                console.log(flag)
                 if(flag){
                     req.session.isLogin = true
                     req.session.username = username
-                    console.log(req.session)
                     res.redirect('/admin')
                 }
                 else{
@@ -206,6 +205,24 @@ class Controller{
         .catch(err => {
             res.send(err)
         })
+    }
+    static formAdmin(req, res){
+        res.render('admin/formAdmin.ejs')
+    }
+    static addAdmin(req, res){
+        const newAdmin = {
+            first_name : req.body.first_name,
+            last_name : req.body.last_name,
+            username : req.body.username,
+            password : req.body.password
+        }
+        Admin.create(newAdmin)
+            .then( result => {
+                res.redirect('/admin')
+            })
+            .catch( err => {
+                res.send(err)
+            })
     }
 }
 
