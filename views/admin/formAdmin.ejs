@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+    </head>
+    <body class="bg">
+            <%- include('../partials/headerAdmin.ejs', {username}) %>
+            <br><br><br><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                        <div class="card card-signup z-depth-0 bg-light text-center">
+                            <div class="card-body">
+                                    <h2>Add Admin</h2>
+                                    <form action="/admin/addAdmin" method="post">
+                                        <label>First Name : </label><br>
+                                        <input type="text" name="first_name" ><br>
+                                        <label>Last Name : </label><br>
+                                        <input type="text" name="last_name" ><br>
+                                        <label>username : </label><br>
+                                        <input type="text" name="username" ><br>
+                                        <label>Password : </label><br>
+                                        <input type="text" name="password" ><br><br>
+                                        <input type="submit" value="Change">
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm"></div>
+                </div>
+            </div>
+            <%- include('../partials/jquery.ejs') %>
+    </body>
+</html>
