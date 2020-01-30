@@ -6,7 +6,7 @@ var salt = bcrypt.genSaltSync(10)
 class Controller{
     static login(req, res){
         let username = req.session.username
-        res.render('admin/login.ejs', {err : null, username})
+        res.render('admin/login.ejs', {err : null, username : 0})
     }
     static checkAccount(req, res){
         const username = req.body.username
