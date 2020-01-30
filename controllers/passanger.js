@@ -10,12 +10,14 @@ class PassangerController{
         }})
           .then(tickets => {
               res.render('passanger/home', {tickets})
+            // res.send(tickets)
           })
           .catch(err => {
               res.send(err)
           })
     }
     
+
     //Train List
     static showList (req, res){
         res.render('./passanger/formBuy')
