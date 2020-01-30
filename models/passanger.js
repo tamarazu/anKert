@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Passanger.associate = function(models) {
     // associations can be defined here
+    Passanger.belongsToMany(models.Train, {through : models.Ticket})
   };
   return Passanger;
 };
