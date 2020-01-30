@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     balance: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING
-  }, {});
+  }, {
+    sequelize
+  });
   Passanger.associate = function(models) {
     // associations can be defined here
   };

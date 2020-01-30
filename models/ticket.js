@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     TrainId: DataTypes.INTEGER,
     PassangerId: DataTypes.INTEGER,
     seat_number: DataTypes.INTEGER
-  }, {});
+  }, {
+    sequelize
+  });
   Ticket.associate = function(models) {
     // associations can be defined here
   };

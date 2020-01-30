@@ -8,9 +8,13 @@ module.exports = (sequelize, DataTypes) => {
     derpature: DataTypes.STRING,
     price: DataTypes.INTEGER,
     seats: DataTypes.INTEGER
-  }, {});
+  }, {
+    sequelize
+  });
   Train.associate = function(models) {
     // associations can be defined here
+    Train.belongsTo(models.Destination)
+    Train.belongsToMany(models.Passanger, {trough : models.Ticket})
   };
   return Train;
 };

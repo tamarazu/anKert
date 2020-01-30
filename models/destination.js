@@ -4,9 +4,12 @@ module.exports = (sequelize, DataTypes) => {
   class Destination extends Model{}
   Destination.init({
     name: DataTypes.STRING
-  }, {});
+  }, {
+    sequelize
+  });
   Destination.associate = function(models) {
     // associations can be defined here
+    Destination.hasMany(models.Train)
   };
   return Destination;
 };
