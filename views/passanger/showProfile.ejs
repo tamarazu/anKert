@@ -1,22 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-   <%- include('../partials/head.ejs')%>
-  </head>
-  <body>
-      <center>
-          <h1>Edit Profile</h1>
-          <br>
-          <br>          
-          <form action="/passanger/profile" method="POST">
-            First Name: <input type="text" name="first_name" value="<%=userLogin.first_name%>" readonly><br>
-            Last Name : <input type="text" name="last_name" value="<%=userLogin.last_name%>"><br>
-            Balance : <input type="text" name="balance" value="<%=userLogin.balance%>" ><br>
-            Username : <input type="text" name="username" value="<%=userLogin.username%>" ><br>
-            Password : <input type="password" name="password" value="<%=userLogin.password%>" ><br>
-            <input type="submit">
-          </form>
-      </center>
-    <br>
-  </body>
+    <head>
+        <%- include('../partials/head.ejs') %>
+    </head>
+    <body class="bg">
+            <%- include('../partials/header.ejs') %>
+            <br><br><br><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                        <div class="card card-signup z-depth-0 bg-light text-center">
+                            <div class="card-body">
+                                    <h2>Edit Profile</h2>
+                                    <form action="/passanger/profile" method="POST">
+                                      First Name: <input type="text" name="first_name" value="<%=userLogin.first_name%>" readonly><br>
+                                      Last Name : <input type="text" name="last_name" value="<%=userLogin.last_name%>"><br>
+                                      Balance : <input type="text" name="balance" value="<%=userLogin.balance%>" ><br>
+                                      Username : <input type="text" name="username" value="<%=userLogin.username%>" ><br>
+                                      Password : <input type="password" name="password" value="<%=userLogin.password%>" ><br>
+                                      <input type="submit">
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm"></div>
+                </div>
+            </div>
+            <%- include('../partials/jquery.ejs') %>
+    </body>
 </html>
+
+
+
+

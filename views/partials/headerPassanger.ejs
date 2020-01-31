@@ -1,0 +1,23 @@
+<header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/admin">AnKert</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/admin/edit/<%= username %>">Edit Profile</a>
+                        <a class="dropdown-item" href="/logout" onclick="return confirm('Do You Realy want To logout')">Logout</a>
+                        <a class="dropdown-item" href="/admin/home" onclick="return confirm('Do You Realy want To logout and Back to Home Page')">Home</a>
+                    </div>
+                </li>
+              </ul>
+            </div>
+            <!-- <form class=" form-inline" action="/books/search" method="GET">
+                <input class="text-center form-control mr-sm-2" placeholder="search title / author / year" aria-label="search" type="search" name="keyword" >
+                <button class="bg-success text-center text-light btn btn-outline-succes " type="submit">search</button>
+            </form> -->
+        </nav>
+    </header>

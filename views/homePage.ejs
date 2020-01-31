@@ -1,16 +1,53 @@
 <!doctype html>
 <html lang="en">
   <head>
-   <%- include('./partials/head.ejs')%>
+   <%- include('partials/head.ejs')%>
   </head>
-  <body>
-    <form action="/" method="POST">
-        Username : <br>
-        <input type="text" name="username"><br>
-        Password : <br>
-        <input type="password" name="password"><br>
+  <body class="bg">
+    <%- include('partials/header.ejs')%>
+    <div class="container">
+          
+      <br>
+      <br> 
+      <br> 
+          <div class="card text-white bg-info mb-3" style="max-width: 24rem;">
+            <div class="card-header">Login</div>
+              <div class="card-body">
+      
+                  <form action="/" method="POST">
+                      <div class="form-group">
+                        <label for="exampleInputUsername1">Username</label>
+                        <input type="text" name="username" class="form-control" aria-describedby="emailHelp">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+                      </div>
 
-        <input type="submit">
-    </form>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" name="password" class="form-control" >
+                      </div>
+                      
+                      <div class="form-group form-check">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+      
+                  <label for="exampleInputPassword1">Dont have an account?</label>
+                  
+                  <a href="/signUp"><button type="button" class="btn btn-secondary">SignUp</button></a>
+                  <!-- <form action="/" method="POST">
+                      Username : <br>
+                      <input type="text" name="username"><br>
+                      Password : <br>
+                      <input type="password" name="password"><br>
+              
+                      <input type="submit">
+                  </form> -->
+              
+                </div>
+            </div>
+            
+          <%- include('partials/jquery.ejs')%>
+
+    </div>
   </body>
 </html>

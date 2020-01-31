@@ -1,43 +1,51 @@
 <!doctype html>
 <html lang="en">
-  <head>
-   <%- include('../partials/head.ejs')%>
-  </head>
-  <body>
-    <center>
-      <h1>Welcome <%=userLogin.first_name%> <%=userLogin.last_name%></h1>
-      <br>
-      <br>
-      <form action="/passanger/search" method="POST">
-        Mau Kemana? <br>
-        <input type="text" name="destination">
-        <input type="submit" value="GO!">
-      </form>
-      <br>
-      <br>    
-      <a href="/passanger/profile"><input type="button" value=" Edit Profile"></a>
-      <br>
-      <br>      
-        
-        <table class="table">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">Train</th>
-              <th scope="col">Departure</th>
-              <th scope="col">Seat Number</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% ticketsTrains.forEach(ticket => {%>
-              <tr>
-                <td><%=ticket.name%></td>
-                <td><%=ticket.derpature%></td>
-                <td><%=ticket.seat_number%></td>
-                <td><a href="/passanger/<%=ticket.idTrain%>/<%=ticket.seat_number%>/delete"><input type="button" value="DELETE"></a></td>
-              </tr>
-            <%})%>
-          </tbody>
-        </table>
-    </center>
-  </body>
+    <head>
+      <%- include('../partials/head.ejs')%>
+    </head>
+    <body class="bg">
+        <%- include('../partials/header.ejs')%>
+          <!-- <div class="jumbotron jumbotron-fluid"> -->
+              <div class="container">
+              <center>
+                  <h1 class="display-4" style="color: aliceblue;">Welcome <%=userLogin.first_name%> <%=userLogin.last_name%></h1>
+                  <br>
+                  <h1 class="display-5" style="color: aliceblue;">Mau Liburan kemana?</h1>
+                  <br>
+                      <br>
+                      <form action="/passanger/search" method="POST">
+                        <input type="text" name="destination" placeholder="Find your destination...">
+                        <input type="submit" value="GO!">
+                      </form>
+                      <br>
+                      <br>    
+                      <a href="/passanger/profile"><input type="button" value=" Edit Profile"></a>
+                      <br>
+                      <br>      
+                      <h3 class="display-7" style="color: aliceblue;">List Booked Tickets</h3>
+                        <table class="table text-center">
+                          <thead class="thead-light">
+                            <tr>
+                              <th scope="col">Train</th>
+                              <th scope="col">Departure</th>
+                              <th scope="col">Seat Number</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-light table-stripped table-hover">
+                            <% ticketsTrains.forEach(ticket => {%>
+                              <tr>
+                                <td><%=ticket.name%></td>
+                                <td><%=ticket.derpature%></td>
+                                <td><%=ticket.seat_number%></td>
+                                <td><a href="/passanger/<%=ticket.idTrain%>/<%=ticket.seat_number%>/delete"><input type="button" value="DELETE"></a></td>
+                              </tr>
+                            <%})%>
+                          </tbody>
+                        </table>
+              </center>
+              <%- include('../partials/jquery.ejs')%>
+            </div>
+        <!-- </div> -->
+    </body>
 </html>
