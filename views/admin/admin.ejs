@@ -24,6 +24,7 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item"><a href="/admin/listTrain" >List of Train</a></li>
                                     <li class="list-group-item"><a href="/admin/listDestination" >List of Destination</a></li>
+                                    <li class="list-group-item"><a href="/admin/list" >List All</a></li>
                                     <li class="list-group-item"><a href="/admin/addTrain" >Add New Train</a></li>
                                     <li class="list-group-item"><a href="/admin/addDestination" >Add New Destination</a></li>
                                     <li class="list-group-item"><a href="/admin/addAdmin" >Add New Admin</a></li>
@@ -32,7 +33,11 @@
                     </div>
             </div>
             <div class="col-lg">
-        </div>
+                <canvas id="chart"></canvas>
+                <script>
+                    let chart = document.getElementById('chart').getContext('2d');
+                </script>
+            </div>
     </div>
     <%- include('../partials/jquery.ejs') %>
 </body>
