@@ -1,5 +1,6 @@
 const { Passanger, Train, Destination, Ticket} = require('../models')
 const nodemailer = require('nodemailer');
+const formatCurrency = require('../helpers/formatCurrency')
 var bcrypt = require('bcryptjs')
 var salt = bcrypt.genSaltSync(10)
 
@@ -56,7 +57,7 @@ class PassangerController{
                 })
             })
         //   res.send(userLogin)
-        res.render('passanger/home', {ticketsTrains, userLogin})
+        res.render('passanger/home', {ticketsTrains, userLogin, formatCurrency})
 
         })
         .catch(err => {
@@ -87,7 +88,7 @@ class PassangerController{
             })
             .then(trains => {
                 // res.send(destination)
-                res.render('./passanger/trainList', {trains})
+                res.render('./passanger/trainList', {trains, formatCurrency})
             })
             .catch(err => {
                 res.send(err)

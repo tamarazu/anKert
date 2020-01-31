@@ -22,6 +22,7 @@ router.get('/:idTrain/:seatNumber/delete', PassangerController.delete)
 router.get('/profile', PassangerController.showProfile)
 router.post('/profile', PassangerController.editProfile)
 
+
 // Create new acoout
 // router.get('/:idTrain/buy', PassangerController.showBuyTransaction)
 // router.post('/:idTrain/buy', PassangerController.buyValidation)

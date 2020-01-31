@@ -20,7 +20,8 @@ class Controller{
               } else if (input.password === user.password){
                 req.session.isLogin = true
                 req.session.username = username
-                res.redirect('/passanger')
+                let failLogin = `Salah Password`
+                res.redirect('/')
             } else {
                 res.redirect('/')
 

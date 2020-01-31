@@ -67,8 +67,9 @@ class Controller{
             // res.send(result)
             for(let j = 0; j < result.length; j++){
                 trainName.push(result[j].name)
-                numPassanger.push(result[j].length)
+                numPassanger.push(result[j].Passangers.length)
             }
+            console.log(numPassanger)
             res.render('admin/admin.ejs', {admin, trainName, numPassanger, username})
 
         })
@@ -112,6 +113,7 @@ class Controller{
             })
     }
     static addTrain(req, res){
+        let username = req.session.username
         const newTrain = {
             name : req.body.name,
             DestinationId : req.body.DestinationId,
