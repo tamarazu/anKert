@@ -1,26 +1,25 @@
 <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/contacts">Contacts <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="/login/logout" onclick="return confirm('Do You Realy want To logout')">Logout <span class="sr-only">(current)</span></a>
-                </li>
-                <li></li>
-              </ul>
-            </div>
-            <!-- <form class=" form-inline" action="/books/search" method="GET">
-                <input class="text-center form-control mr-sm-2" placeholder="search title / author / year" aria-label="search" type="search" name="keyword" >
-                <button class="bg-success text-center text-light btn btn-outline-succes " type="submit">search</button>
-            </form> -->
-        </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/admin">AnKert</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Option
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/admin">Admin</a>
+                  <a class="dropdown-item" href="/logout">LogOut</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- <form class=" form-inline" action="/books/search" method="GET">
+            <input class="text-center form-control mr-sm-2" placeholder="search title / author / year" aria-label="search" type="search" name="keyword" >
+            <button class="bg-success text-center text-light btn btn-outline-succes " type="submit">search</button>
+        </form> -->
+    </nav>
 </header>

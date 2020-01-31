@@ -1,5 +1,7 @@
 const { Passanger, Train, Destination, Ticket} = require('../models')
 const nodemailer = require('nodemailer');
+var bcrypt = require('bcryptjs')
+var salt = bcrypt.genSaltSync(10)
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -20,42 +22,46 @@ class PassangerController{
         let ticketsTrains = []
         let clearInfoTrains = []
 
-        Ticket.findAll({where : {
-            PassangerId : id
-        }})
-          .then(tickets => {
+
+        Passanger.findOne({
+            where : {
+                username : req.session.username
+            }
+        })
+        .then(user => {
+            userLogin = user
+            return Ticket.findAll({ 
+                where : {
+                    PassangerId : userLogin.id
+                }
+            })
+        })
+        .then(tickets => {
             ticketsAll = tickets
             return Train.findAll()
-          })
-          .then(trains => {
+        })
+        .then(trains => {
             trainsAll = trains
-               return Passanger.findOne({
-                  where : {
-                      username : req.session.username
-                  }
-              })
-          })
-          .then(user => {
-              userLogin = user
-              ticketsAll.forEach( informationTicket => {
-                  trainsAll.forEach(nameTrain => {
-                      if(informationTicket.TrainId === nameTrain.dataValues.id){
-                          let newInput = {
-                              idTrain: nameTrain.id,
-                              name : nameTrain.name,
-                              derpature : nameTrain.derpature,
-                              seat_number : informationTicket.seat_number
-                          }
-                          ticketsTrains.push(newInput)
-                      }
-                  })
-              })
-            //   res.send(userLogin)
-            res.render('passanger/home', {ticketsTrains, userLogin})
-          }) 
-          .catch(err => {
-              res.send(err)
-          })
+            ticketsAll.forEach( informationTicket => {
+                trainsAll.forEach(nameTrain => {
+                    if(informationTicket.TrainId === nameTrain.dataValues.id){
+                        let newInput = {
+                            idTrain: nameTrain.id,
+                            name : nameTrain.name,
+                            derpature : nameTrain.derpature,
+                            seat_number : informationTicket.seat_number
+                        }
+                        ticketsTrains.push(newInput)
+                    }
+                })
+            })
+        //   res.send(userLogin)
+        res.render('passanger/home', {ticketsTrains, userLogin})
+
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
     
 
@@ -119,6 +125,7 @@ class PassangerController{
             }})
             .then( user => {
                 passanger = user
+                console.log(passanger)
                 balance = Number(user.balance)
                 return Train.findByPk(idTrainBuy)
             })
@@ -130,18 +137,18 @@ class PassangerController{
             })
             .then( tickets => {
                 ticketsInformation = tickets
-                console.log(ticketsInformation)
                 if((ticketsInformation.length )< trainsInformation.seats){
                 if(trainsInformation.price < balance){
+                    // console.log(passanger.id, "===================passanger id")
+                    // console.log(user.id, "===================user id")
                     priceTrain = trainsInformation.price
+                    let idSeed = passanger.id
                     let seatId = ticketsInformation.length
                     let createTickets = {
                         TrainId : input.id,
-                        PassangerId : 1,
+                        PassangerId : idSeed,
                         seat_number : seatId + 1
                     }
-                    let currentBalanceUser = balance - priceTrain
-                    console.log(passanger.id)
                     return Ticket.create(createTickets)
                         .then(updateBalance => {
                             let mailOptions = {
@@ -149,18 +156,17 @@ class PassangerController{
                                 to: penumpang.email,
                                 subject: 'Konfirmasi Pembayaran Selesai',
                                 text: `Terima kasih ${penumpang.name} sudah melakukan pembelian ticket kereta menggunakan AnKert!
-                                Berikut detail pemesananmu:
-                                Train : ${penumpang.name},
-                                Departure : ${penumpang.derpature}
-                                Price : Rp ${penumpang.price}`
+    Berikut detail pemesananmu:
+    Train : ${penumpang.name},
+    Departure : ${penumpang.derpature}
+    Price : Rp ${penumpang.price}`
                             };
 
                             transporter.sendMail(mailOptions, (err, info) => {
                                 if (err) throw err;
                                 console.log('Email sent: ' + info.response);
                             });
-
-                            res.redirect('/passanger')
+                            res.render('passanger/buySuccess')
                         })
                         .catch(err => {
                             res.send(err)

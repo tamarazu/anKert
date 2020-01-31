@@ -1,12 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-   <%- include('../partials/head.ejs')%>
-  </head>
-  <body>
-      <h1>Transaksi Berhasil!</h1>
-      <a href="/passanger"><input type="button" value="Back to Home"></a>
-      
-    <br>
-  </body>
+    <head>
+        <%- include('../partials/head.ejs') %>
+    </head>
+    <body class="bg">
+            <%- include('../partials/header.ejs') %>
+            <br><br><br><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                        <div class="card card-signup z-depth-0 bg-light text-center">
+                            <div class="card-body">
+                                <h1>Transaksi Berhasil!</h1>
+                                <a href="/passanger"><input type="button" value="Back to Home"></a>
+                                
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm"></div>
+                </div>
+            </div>
+            <%- include('../partials/jquery.ejs') %>
+    </body>
 </html>
+
+
+
+
+
+
+
+
+

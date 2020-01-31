@@ -1,28 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-   <%- include('../partials/head.ejs')%>
-  </head>
-  <body>
-      <center>
-          <h1>Buy Confirmation</h1>
-          <br>
-          <br>
-      
-          <!-- <h3>Train Name : <%=information.name%></h3><br>
-          <h3>Departure : <%=information.derpature%></h3><br>
-          <h3> Price : <%=information.price%></h3><br> -->
-          
-          <form action="/passanger/<%=information.id%>/buy" method="POST">
-            <!-- <%=information.price%> -->
-            Train ID: <input type="text" name="id" value="<%=information.id%>" readonly><br>
-            Train Name : <input type="text" name="name" value="<%=information.name%>" readonly><br>
-            Departure : <input type="text" name="derpature" value="<%=information.derpature%>" readonly><br>
-            Price : <input type="text" name="price" value="<%=information.price%>" readonly><br>
-            Email : <input type="text" name="email" placeholder="for confirmation (KUDU)" required><br>
-            <input type="submit">
-          </form>
-      </center>
-    <br>
-  </body>
+    <head>
+        <%- include('../partials/head.ejs') %>
+    </head>
+    <body class="bg">
+            <%- include('../partials/header.ejs') %>
+            <br><br><br><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <!-- <div class="col-sm"> -->
+                        <div class="card card-signup z-depth-0 bg-light text-center">
+                            <div class="card-body">
+                                    <h2>Buy Confirmation</h2>
+                                    <form action="/passanger/<%=information.id%>/buy" method="POST">
+                                      <!-- <%=information.price%> -->
+                                      Train ID:<br> 
+                                      <input type="text" name="id" value="<%=information.id%>" readonly><br>
+                                      Train Name : <br>
+                                      <input type="text" name="name" value="<%=information.name%>" readonly><br>
+                                      Departure : <br>
+                                      <input type="text" name="derpature" value="<%=information.derpature%>" readonly><br>
+                                      Price : <br>
+                                      <input type="text" name="price" value="<%=information.price%>" readonly><br>
+                                      Email : <br>
+                                      <input type="text" name="email" placeholder="for confirmation (KUDU)" required><br>
+                                      <br>
+                                      <input type="submit">
+                                    </form>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                    <div class="col-sm"></div>
+                </div>
+            </div>
+            <%- include('../partials/jquery.ejs') %>
+    </body>
 </html>
