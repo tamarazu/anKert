@@ -49,13 +49,28 @@ class Controller{
     }
     static showProfile(req, res){
         let username = req.session.username
+        let admin = {}
+        let trainName = []
+        let numPassanger = []
         Admin.findOne({
             where : {
                 username : username
             }
         })
         .then(result => {
-            res.render('admin/admin.ejs', {result, username})
+            admin = result
+            return Train.findAll({
+                include : Passanger
+            })
+        })
+        .then(result => {
+            // res.send(result)
+            for(let j = 0; j < result.length; j++){
+                trainName.push(result[j].name)
+                numPassanger.push(result[j].length)
+            }
+            res.render('admin/admin.ejs', {admin, trainName, numPassanger, username})
+
         })
         .catch(err => {
             res.send(err)
@@ -113,7 +128,8 @@ class Controller{
             })
     }
     static addFormDestination(req, res){
-        res.render('forDestination.ejs')
+        let username = req.session.username
+        res.render('admin/formDestination.ejs', {username})
     }
     static addDestination(req, res){
         const newDestination = {
@@ -182,10 +198,11 @@ class Controller{
         })
     }
     static formUpdateDestination(req, res){
+        let username = req.session.username
         const id = req.params.id
         Destination.findByPk(id)
             .then(result => {
-                res.render('admin/formUpdateDestination.ejs',{result})
+                res.render('admin/formUpdateDestination.ejs',{result, username})
             })
             .catch(err => {
                 res.send(err)

@@ -15,10 +15,10 @@
                                 <h3 class="text-center">Profile</h3>
                                 <div class="card-text">
                                     <label>Full Name :</label> &emsp;
-                                    <label><%= result.first_name%> <%= result.last_name %></label>
+                                    <label><%= admin.first_name%> <%= admin.last_name %></label>
                                     <br>
                                     <label>Username  : </label> &emsp;
-                                    <label><%= result.username%></label>
+                                    <label><%= admin.username%></label>
                                     <br>
                                 </div>
                                 <ul class="list-group list-group-flush">
@@ -33,9 +33,26 @@
                     </div>
             </div>
             <div class="col-lg">
-                <canvas id="chart"></canvas>
+                <div class="container">
+                        <div class="card card-signup z-depth-0 bg-light ">
+                            <div class="card-body">
+                                <canvas id="chart"></canvas>
+                            </div>
+                        </div>
+                </div>
                 <script>
                     let chart = document.getElementById('chart').getContext('2d');
+                    let massPopChart = new Chart(chart, {
+                        type : 'bar',
+                        data : {
+                            labels : <%- JSON.stringify(trainName) %>,
+                            datasets : [{
+                                label : 'Train',
+                                data : <%- JSON.stringify(numPassanger) %>
+                            }]
+                        },
+                        options : {}
+                    })
                 </script>
             </div>
     </div>
