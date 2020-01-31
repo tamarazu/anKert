@@ -29,7 +29,7 @@
                             <th scope="row"><%= train.id%></th>
                             <td><%= train.name%></td>
                             <td><%= train.derpature%></td>
-                            <td><%= train.price%></td>
+                            <td><%= formatCurrency(train.price)%></td>
                             <td><a href="/passanger/<%= train.id%>/buy"><input type="button" value="YES"></a></td>
                           </tr>
                         <%})%>

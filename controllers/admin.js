@@ -97,6 +97,7 @@ class Controller{
             })
     }
     static addTrain(req, res){
+        let username = req.session.username
         const newTrain = {
             name : req.body.name,
             DestinationId : req.body.DestinationId,
@@ -113,7 +114,8 @@ class Controller{
             })
     }
     static addFormDestination(req, res){
-        res.render('forDestination.ejs')
+        let username = req.session.username
+        res.render('admin/formDestination.ejs', {username})
     }
     static addDestination(req, res){
         const newDestination = {
@@ -182,10 +184,11 @@ class Controller{
         })
     }
     static formUpdateDestination(req, res){
+        let username = req.session.username
         const id = req.params.id
         Destination.findByPk(id)
             .then(result => {
-                res.render('admin/formUpdateDestination.ejs',{result})
+                res.render('admin/formUpdateDestination.ejs',{result, username})
             })
             .catch(err => {
                 res.send(err)
