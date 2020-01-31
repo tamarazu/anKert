@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+            <%- include('../partials/head.ejs') %>
+        </head>
+        <body class="bg">
+                <%- include('../partials/headerAdmin.ejs', {username}) %>
+                <br><br><br><br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                                <div class="card card-signup z-depth-0 bg-light ">
+                                    <div class="card-body">
+                                        <br>
+                                            <h3 class="text-center">Profile</h3>
+                                            <div class="card-text">
+                                                <label>Full Name :</label> &emsp;
+                                                <label><%= admin.first_name%> <%= admin.last_name %></label>
+                                                <br>
+                                                <label>Username  : </label> &emsp;
+                                                <label><%= admin.username%></label>
+                                                <br>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item"><a href="/admin/listTrain" >List of Train</a></li>
+                                                <li class="list-group-item"><a href="/admin/listDestination" >List of Destination</a></li>
+                                                <li class="list-group-item"><a href="/admin/list" >List All</a></li>
+                                                <li class="list-group-item"><a href="/admin/addTrain" >Add New Train</a></li>
+                                                <li class="list-group-item"><a href="/admin/addDestination" >Add New Destination</a></li>
+                                                <li class="list-group-item"><a href="/admin/addAdmin" >Add New Admin</a></li>
+                                            </ul>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-lg">
+                                <table class="table text-center">
+                                    <thead class="table-dark text-light">
+                                        <tr>
+                                            <th colspan="7">Train</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Destination</th>
+                                            <th>Departure</th>
+                                            <th>Price</th>
+                                            <th>Seat Capacity</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-light table-stripped table-hover">
+                                        <% trains.map(data => { %> 
+                                            <tr>
+                                                <td><%= data.id %></td>
+                                                <td><%= data.name %></td>
+                                                <td><%= data.Destination.name %></td>
+                                                <td><%= data.derpature %></td>
+                                                <td><%= formatCurrency(data.price) %></td>
+                                                <td><%= data.seats %></td>
+                                                <td><a href="/admin/update/<%= data.id %>/train">Edit</a> | <a href="/admin/delete/<%= data.id %>/train">Delete</a></td>
+                                            </tr>    
+                                        <%})%>
+                                    </tbody>
+                                    <thead class="table-dark text-light">
+                                        <tr>
+                                            <th colspan="7">Destination</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th colspan="3">Name</th>
+                                            <th colspan="3">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-light table-stripped table-hover">
+                                        <% destinations.map(data => { %> 
+                                            <tr>
+                                                <td><%= data.id %></td>
+                                                <td colspan="3"><%= data.name %></td>
+                                                <td colspan="3"><a href="/admin/update/<%= data.id %>/destination">Edit</a> | <a href="/admin/delete/<%= data.id %>/destination">Delete</a></td>
+                                            </tr>    
+                                        <%})%>
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+                <%- include('../partials/jquery.ejs') %>
+    </body>
+</html>

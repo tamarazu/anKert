@@ -272,6 +272,40 @@ class Controller{
             res.send(err)
         })
     }
+    static list(req, res){
+        let username = req.session.username
+        let admin = {}
+        let trains = []
+        let destinations = []
+        Admin.findOne({
+            where : {
+                username : username
+            }
+        })
+        .then(result => {
+            admin = result
+            return Train.findAll({
+                order : [['id']],
+                include : Destination
+            })
+        })
+        .then(result => {
+            trains = result
+            return Destination.findAll({
+                order : [['id']]
+            })
+                .catch(err => {
+                    res.send(err)
+                })
+        })
+        .then(result => {
+            destinations = result
+            res.render('admin/list.ejs', {admin, trains, destinations, formatcurrency, username})
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
 }
 
 module.exports = Controller
